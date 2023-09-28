@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CharacterDetail } from 'src/app/model/character-detail';
 import { LocationDetail } from 'src/app/model/location-detail';
 import { DataService } from 'src/app/services/data.service';
 
@@ -9,35 +10,35 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./location.component.scss']
 })
 export class LocationComponent {
+  @Input() character?: CharacterDetail;
 
-  location? : LocationDetail
+  location?: LocationDetail;
+  residentCharacters: CharacterDetail[] = [];
 
-  constructor(private route:ActivatedRoute, private dataServ: DataService, private router:Router){}
+  constructor(private route: ActivatedRoute, private dataServ: DataService, private router: Router) {}
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      this.dataServ.getLocation(id).subscribe((loc => this.location = loc))
+      this.dataServ.getLocation(id).subscribe((loc) => {
+        this.location = loc;
+        this.fetchResidentCharacters(loc.residents);
+      });
     }
   }
 
-  navigateToCharacter(){
-    const residentsArray = this.location?.residents;
-    if (residentsArray) {
-      for (let i = 0; i < residentsArray.length; i++) {
-        const character = residentsArray[i];
-        let characterIdArray = character.split('/')
-        const characterId = characterIdArray[characterIdArray.length-1]
-        console.log(characterId);
-        this.router.navigateByUrl("/character/"+characterId)
+  fetchResidentCharacters(residents: string[]) {
+    residents.forEach((residentUrl) => {
+      const characterId = residentUrl.split('/').pop();
+      if (characterId) {
+        this.dataServ.getSingleCharacter(characterId).subscribe((character) => {
+          this.residentCharacters.push(character);
+        });
       }
-    }
-    
-    
-    // const urlArray = url.split('/');
-    // const characterId = urlArray[urlArray.length-1]
-    // console.log(characterId);
-    // this.router.navigateByUrl("/character/"+characterId)
+    });
   }
 
+  navigateToCharacter(characterId: number) {
+    this.router.navigateByUrl('/character/' + characterId);
+  }
 }
