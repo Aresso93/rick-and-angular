@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { LocationRoutingModule } from './location-routing.module';
 import { LocationComponent } from './location.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -12,7 +13,7 @@ import { LocationComponent } from './location.component';
   imports: [
     CommonModule,
     LocationRoutingModule,
-
+    SharedModule
   ]
 })
 export class LocationModule { }

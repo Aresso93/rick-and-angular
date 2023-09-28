@@ -6,7 +6,7 @@ const routes: Routes = [
   {path: 'home', component: CharactersListComponent},
   {path: 'character/:id', loadChildren: () => import('./components/character/character.module').then(m => m.CharacterModule) },
   {path: 'location/:id', loadChildren: () => import('./components/location/location.module').then(m => m.LocationModule) },
-  {path: 'episode/:id', loadChildren: () => import('./episode/episode.module').then(m => m.EpisodeModule) },
+  {path: 'episode/:id', loadChildren: () => import('./components/episode/episode.module').then(m => m.EpisodeModule) },
   {path: '', redirectTo:'/home', pathMatch:'full'},
   {path: '**', redirectTo: '/home'}
 ];

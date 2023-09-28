@@ -16,7 +16,10 @@
     </button>
   </div>
   <div>
-    <h2>episodi</h2>
+    <h2>Episodes</h2>
+    <button (click)="navigateToEpisode()" mat-icon-button>
+      <mat-icon>near_me</mat-icon>
+    </button>
     <ul>
       <li *ngFor="let episode of character.episode">{{episode}}</li>
     </ul>

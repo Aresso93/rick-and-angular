@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, map } from 'rxjs';
 import { CharacterDetail } from '../model/character-detail';
 import { LocationDetail } from '../model/location-detail';
+import { EpisodeDetail } from '../model/episode-detail';
 
 @Injectable({
   providedIn: 'root'
@@ -51,6 +52,10 @@ export class DataService {
 
   getLocation(id: string) {
     return this.http.get<LocationDetail>(this.BASE_URL + 'location/' + id)
+  }
+
+  getEpisode(id: string){
+    return this.http.get<EpisodeDetail>(this.BASE_URL + 'episode/'+id)
   }
 
 }

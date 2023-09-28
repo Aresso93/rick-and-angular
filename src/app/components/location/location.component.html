@@ -1,1 +1,15 @@
-<p>location works!</p>
+<div class="location-container" *ngIf="location">
+    <h1>{{location.name}}</h1>
+    <span>Type of location: {{location.type}}</span>
+    <span>Location dimension: {{location.dimension}}</span>
+    <div>
+      <h2>Residents</h2>
+      <button (click)="navigateToCharacter()" mat-icon-button>
+        <mat-icon>near_me</mat-icon>
+      </button>
+      <ul>
+        <li *ngFor="let character of location.residents">{{character}}</li>
+      </ul>
+    </div>
+  </div>
+  

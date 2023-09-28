@@ -37,4 +37,28 @@ export class CharacterComponent implements OnInit {
     console.log(locationId);
     this.router.navigateByUrl("/location/"+locationId)
   }
+
+  navigateToEpisode(){
+    const episodeArray = this.character!.episode
+    console.log('TATSUMAKI', episodeArray);
+    const episodeIdArray = []
+    
+    for (let i = 0; i < episodeArray.length; i++) {
+      const string = episodeArray[i];
+      const stringArray = string.split('/')
+      const episodeId = stringArray[stringArray.length-1]
+      episodeIdArray.push(episodeId)
+      
+      
+
+      
+    }
+    console.log('SHORYUKEN', episodeIdArray);
+    // const episodeId = urlArray[urlArray.length-1]
+    // console.log('HADOKEN', episodeId);
+    // this.router.navigateByUrl("/episode/"+episodeId)
+
+  }
+
+
 }
